@@ -12,7 +12,7 @@ architecture Behavioral of ssd is
 
 begin
 
-	process(num)
+	process(num, char)
 		begin
 			case num is
 			when 0 =>
@@ -38,48 +38,47 @@ begin
 			when others =>
 			display <= "1111111";
 		end case;
-	end process;
 		
-		process(char)
-			begin
 				case char is
-				when "a" =>
+				when 'a' =>
 				display <= "0001000";
-				when "b" =>
+				when 'b' =>
 				display <= "1100000";
-				when "c" =>
+				when 'c' =>
 				display <= "1110010";
-				when "d" =>
+				when 'd' =>
 				display <= "1000010";
-				when "e" =>
+				when 'e' =>
 				display <= "0110000";
-				when "f" =>
+				when 'f' =>
 				display <= "0111000";
-				when "i" =>
+				when 'g' =>
 				display <= "1001111";
-				when "j" =>
+				when 'h' =>
 				display <= "1000111";
-				when "l" =>
+				when 'i' =>
 				display <= "1110001";
-				when "m" =>
+				when 'm' =>
 				display <= "0101010";
-				when "m" =>
+				when 'n' =>
 				display <= "1101010";
-				when "o" =>
+				when 'o' =>
 				display <= "1100010";
-				when "p" =>
+				when 'p' =>
 				display <= "0011000";
-				when "r" =>
+				when 'r' =>
 				display <= "1111010";
-				when "s" =>
+				when 's' =>
 				display <= "0100100";
-				when "t" =>
+				when 't'=>
 				display <= "1110000";
-				when "u" =>
+				when 'u' =>
 				display <= "1100011";
-				when "v" =>
+				when 'v' =>
 				display <= "1010101";
-			end case;
+				when others =>
+				display <= "1111111";
+				end case;
 		end process;
 
 end Behavioral;
