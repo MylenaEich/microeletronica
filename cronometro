@@ -1,0 +1,61 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity cronometro is
+    Port ( rst : in  STD_LOGIC;
+           clk : in  STD_LOGIC;
+           vel : in  STD_LOGIC_VECTOR (1 downto 0);
+           AN : out  STD_LOGIC_VECTOR (4 downto 0);
+           Useg : out  INTEGER;
+           Dseg : out  INTEGER
+			 );
+end cronometro;
+
+architecture Behavioral of cronometro is
+	constant timer: integer := 50000000; -- 1 segundo | Para Simulacao ==> 16
+	constant display_frequency: integer := 32768; -- 32768; -- ~60Hz * 4 | Para Simulacao ==> 1
+	
+	signal count: integer range 0 to 50000000;
+	signal debounceDisplay: natural;
+	
+	signal un_seg: integer range 0 to 9:= 0;
+	signal dec_seg: integer range 0 to 9:= 9;
+	
+	signal num: integer range 0 to 9;
+
+begin
+	process(rst, clk, vel, debounce, debounceDisplay, un_seg, dec_seg, un_min, dec_min, sel)
+	begin
+		if (rst = '1') then
+			un_seg <= 0;
+			dec_seg <= 0;
+			count <= 0;
+			debounceDisplay <= 0;
+			num <= 0;
+		elsif (clk'event and clk = '1') then
+			count <= count + 1;
+			if (count >= timer) then
+				if (un_seg = 0) then
+					un_seg <= 9;
+					dec_seg <= dec_seg - 1;
+				else 
+					un_seg <= un_seg - 1;
+				end if;
+				count <= 0;
+			end if;
+			
+			-- Mostrar tempo atual nos displays
+			if (debounceDisplay = display_frequency) then
+				debounceDisplay <= 0;
+			else 
+				debounceDisplay <= debounceDisplay + 1;
+			end if;
+		end if;
+	end process;
+	
+	Useg <= un_seg;
+	Dseg <= dec_seg;
+
+end Behavioral;
+
