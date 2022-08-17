@@ -1,0 +1,13 @@
+net "anodo(3)" loc = F17; 
+net "anodo(2)" loc = H17;
+net "anodo(1)" loc = C18;
+net "anodo(0)" loc = F15;
+net "display(6)" loc = L18;
+net "display(5)" loc = F18;
+net "display(4)" loc = D17;
+net "display(3)" loc = D16;
+net "display(2)" loc = G14;
+net "display(1)" loc = J17;
+net "display(0)" loc = H14;
+net "clk" loc = B8;
+net "rst" loc = H13;
